@@ -7,9 +7,9 @@
 (source
  (github username/reponame))
 
-(authors "Author Name")
+(authors "Sean Brynjólfsson")
 
-(maintainers "Maintainer Name")
+(maintainers "Sean Brynjólfsson")
 
 (license LICENSE)
 
