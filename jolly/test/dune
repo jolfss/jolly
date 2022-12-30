@@ -1,0 +1,3 @@
+(test
+ (name quantity_test)
+ (libraries jolly ounit2))

@@ -3,15 +3,15 @@ open Util
 
 type space = Subspace.subspace list
 
+let labels (space : space) = List.fold_left (fun accumulator subspace -> Subspace.labels subspace :: accumulator) [] space
+
+let lengths (space : space) = List.fold_left (fun accumulator subspace -> Subspace.lengths subspace :: accumulator) [] space
+
 let empty_space () : space = []
 
 let zip_space labels lengths : space = [Subspace.zip labels lengths]
 
 let space_of_subspace subspace : space = [subspace]
-
-let labels (space : space) = List.fold_left (fun accumulator subspace -> Subspace.labels subspace :: accumulator) [] space
-
-let lengths (space : space) = List.fold_left (fun accumulator subspace -> Subspace.lengths subspace :: accumulator) [] space
 
 let subdivide subspace space : space =
   let label_collision = 
