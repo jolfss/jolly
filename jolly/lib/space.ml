@@ -32,7 +32,7 @@ let string_of_space (space:space) =
 
 let size (space:space) = if space == [] then 0 else List.fold_left (fun accumulator subspace -> accumulator * (Subspace.size subspace)) 1 space
 
-let index_weight_association space =
+let index_weights space =
   let flat_lengths = lengths space |> List.flatten in
   let flat_labels = labels space |> List.flatten in
   List.fold_left2 
@@ -42,8 +42,8 @@ let index_weight_association space =
   )
   [(List.hd flat_labels, 1)]  (List.tl flat_labels) (List.tl flat_lengths)
 
-let index_function (space : space) : (string * int )list -> int = 
-  let index_assoc = index_weight_association space in 
+let index_from_position (space : space) : (string * int)  list -> int = 
+  let index_assoc = index_weights space in 
     List.fold_left 
     (fun accumulator (label, position) -> accumulator + 
       (match List.assoc_opt label index_assoc with
@@ -51,3 +51,13 @@ let index_function (space : space) : (string * int )list -> int =
         | None -> raise @@ Label_not_found label)
     )
     0
+
+let position_from_index (space : space) index : (string * int) list = 
+  let rec get_next_label_component accumulator remainder = function
+    | (label, length) :: more -> get_next_label_component 
+    ((label,remainder mod length) :: accumulator)
+    (remainder / length)
+    more 
+    | [] -> accumulator |> List.rev
+  in
+  get_next_label_component [] index (index_weights space)
