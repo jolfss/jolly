@@ -1,4 +1,4 @@
-open Jolly
+open Quantities
 
 let sub_a = Subspace.zip ["x";"y";"z"] [10;10;10]
 let sub_b = Subspace.zip ["a";"b"] [30;30]

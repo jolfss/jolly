@@ -1,4 +1,4 @@
 (executable
  (public_name jolly)
  (name main)
- (libraries jolly))
+ (libraries quantities))

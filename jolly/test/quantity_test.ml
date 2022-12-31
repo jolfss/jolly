@@ -1,5 +1,5 @@
 open OUnit2
-open Jolly
+open Quantities
 
 let twenty_million_sized = Space.zip_space ["a";"b";"c";"d"] [100;100;100;20] 
 
