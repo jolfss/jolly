@@ -8,9 +8,11 @@ let sp_b = Space.space_of_subspace sub_b
 let sp_ab = sp_a |> Space.subdivide sub_b
 let sp_ba = sp_b |> Space.subdivide sub_a
 
-let rec printer = function 
-  | space :: more -> (print_endline (Space.string_of_space space);printer more)
+let rec eval_spaces = function 
+  | space :: more -> print_endline (Space.string_of_space space); eval_spaces more;
   | [] -> ()
 
-let _ = printer [sp_a; sp_b; sp_ab; sp_ba]
 
+let _ = (
+  eval_spaces [sp_a; sp_b; sp_ab; sp_ba];
+  )
