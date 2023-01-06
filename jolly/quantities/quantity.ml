@@ -20,4 +20,27 @@ let from_position space function_of_position =
   let positions = positions_by_index space in 
   {space=space; indexer=Space.index_from_position space; values=List.map function_of_position positions}
 
+let at_index index = function {values; _} -> List.nth values index  
+
+let pair = function {values=values_a; space=space_a; indexer=indexer} -> function a_op_b -> function {values=values_b; space=space_b;_} ->
+  if Space.size space_a <> Space.size space_b then raise @@ Exceptions.Quantity_mismatch (Space.string_of_space space_a, Space.string_of_space space_b) else 
+  {values=List.map2 a_op_b values_a values_b; indexer=indexer; space=space_a}
+
+let (#+) quantity_a quantity_b = pair quantity_a (+) quantity_b
+
+let (#+.) quantity_a quantity_b = pair quantity_a (+.) quantity_b
+
+let (#-) quantity_a quantity_b = pair quantity_a (-) quantity_b
+
+let (#-.) quantity_a quantity_b = pair quantity_a (-.) quantity_b
+
+let (#*) quantity_a quantity_b = pair quantity_a ( * ) quantity_b
+
+let (#*.) quantity_a quantity_b = pair quantity_a ( *. ) quantity_b
+
+let (#/) quantity_a quantity_b = pair quantity_a (/) quantity_b
+
+let (#/.) quantity_a quantity_b = pair quantity_a (/.) quantity_b
+
+
 

@@ -24,6 +24,7 @@ let subdivide subspace space : space =
   | None -> space @ [subspace]
 
 let string_of_space (space:space) =
+  if space == [] then "[[]]" else
   let rec append_subspaces accumulator = function
     | subspace :: [] -> accumulator^","^Subspace.string_of_subspace subspace
     | subspace :: more -> append_subspaces (accumulator^","^Subspace.string_of_subspace subspace) more

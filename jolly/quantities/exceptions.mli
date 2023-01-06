@@ -7,3 +7,6 @@ exception Label_collision of string
 
 exception Label_not_found of string
 (** [Label_not_found label] is thrown if [label] is expected to exist and does not.*)
+
+exception Quantity_mismatch of string * string
+(** [Quantity_mismatch (string_1, string_2)] is thrown when the quantity represented by string_1 is not compatible with the quantity represented by string_2.*)
